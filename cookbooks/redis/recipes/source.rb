@@ -101,7 +101,7 @@ if node['redis']['source']['create_service']
   end
 
   template "/etc/redis/#{port}.conf" do
-    source  "redis.conf.erb"
+    source  "redis.267.conf.erb"
     owner   "root"
     group   "root"
     mode    "0644"
