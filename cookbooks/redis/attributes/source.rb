@@ -18,11 +18,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-default['redis']['source']['version'] = "2.6.7"
+default['redis']['source']['version'] = "2.8.17"
 default['redis']['source']['prefix']  = "/usr/local"
 
 default['redis']['source']['tar_url']   =
-  "http://redis.googlecode.com/files/redis-#{node['redis']['source']['version']}.tar.gz"
+  "http://download.redis.io/releases/redis-#{node['redis']['source']['version']}.tar.gz"
 default['redis']['source']['tar_checksum']   = "31bb43e42f488300708086d42f88693b"
 
 default['redis']['source']['create_service']  = true
