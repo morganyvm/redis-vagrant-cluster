@@ -8,14 +8,14 @@ def setup_vm(shard_name, shard, port)
 
     shard.vm.provision :chef_solo do |chef|
         chef.cookbooks_path = ['cookbooks']
-        chef.json.merge! :tz => 'America/NewYork'
+        chef.json.merge! :tz => 'America/Sao_Paulo'
 
         chef.add_recipe 'redis::source'
 
         chef.json = {
             'redis' => {
                 'source' => {
-                    'version' => '2.6.7',
+                    'version' => '2.8.17',
                 },
                 'password' => 'foobared',
                 'bind' => "0.0.0.0"
