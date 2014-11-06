@@ -1,5 +1,9 @@
 require 'rubygems'
 
+
+
+
+
 def setup_vm(node_name, node, port, master)
     node.vm.host_name = node_name
     node.vm.box = "precise32"
@@ -8,6 +12,9 @@ def setup_vm(node_name, node, port, master)
 
     node.vm.provision :chef_solo do |chef|
         chef.cookbooks_path = ['cookbooks']
+        chef.vm.provision :shell, :inline => "sudo apt-get -y install build-essential"
+        chef.vm.provision :shell, :inline => chef_upgrade
+        chef.vm.provision :shell, :inline => easy_run_solo
         chef.json.merge! :tz => 'America/Sao_Paulo'
 
         chef.add_recipe 'redisio'
@@ -43,13 +50,13 @@ Vagrant::Config.run do |config|
 
     (1..2).each do |i|
 
-        config.vm.define :master#{i} do |node|
+        config.vm.define "master#{i}" do |node|
             setup_vm("master#{i}", node, 6379, nil)
         end
         
         (1..2).each do |j|
 
-            config.vm.define :node-#{i}-#{j} do |node|
+            config.vm.define "node-#{i}-#{j}" do |node|
                 setup_vm("node-#{j}", node, 6379, "master#{i}")
             end
         end
